@@ -60,6 +60,19 @@ func main() {
 0 [[1 64 64] [2 1 1] [3 0 0]]
 ```
 
+## Scheduling Algorithm
+
+In order to choose which elevator should be requested to serve a pickup request, the following cost heuristic is applied:
+
+ - If the elevator is not moving, ```cost = abs(currentFloor - callingFloor)```
+ - If the elevator is moving in the same direction of the pickup request:
+  - ```cost = abs(currentFloor, min(callingFloor, nextFloor))``` if going up
+  - ```cost = abs(currentFloor, max(callingFloor, nextFloor))``` if going down
+ - If the elevator is not moving in the same direction of the pickup request, then:
+  - ```cost = abs(currentFloor - nextFloor) + abs(nextFloor - callingFloor)```
+
+The elevator with the lowest cost is then chosen to answer the pickup request.
+
 ## Install
 
 ```shell
