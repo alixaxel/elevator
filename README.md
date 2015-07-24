@@ -60,9 +60,16 @@ func main() {
 0 [[1 64 64] [2 1 1] [3 0 0]]
 ```
 
+The first integer represents the number of elevators that were moved in each step.
+The slice triplets represent:
+
+ - Elevator ID
+ - Floor Number
+ - Goal Floor Number
+
 ## Scheduling Algorithm
 
-In order to choose which elevator should be requested to serve a pickup request, the following cost heuristic is applied:
+In order to choose which elevator should be requested to serve a pickup request, the following [cost heuristic](https://github.com/alixaxel/elevator/blob/e09cb4e91c1c3e3067aba181b960eec1e815c344/elevator.go#L56) is applied:
 
  - If the elevator is not moving, ```cost = abs(currentFloor - callingFloor)```
  - If the elevator is moving in the same direction of the pickup request:
@@ -71,7 +78,7 @@ In order to choose which elevator should be requested to serve a pickup request,
  - If the elevator is not moving in the same direction of the pickup request, then:
   - ```cost = abs(currentFloor - nextFloor) + abs(nextFloor - callingFloor)```
 
-The elevator with the lowest cost is then chosen to answer the pickup request.
+The elevator with the [lowest ```cost```](https://github.com/alixaxel/elevator/blob/e09cb4e91c1c3e3067aba181b960eec1e815c344/elevatorControl.go#L24) is then chosen to answer the pickup request.
 
 ## Install
 
